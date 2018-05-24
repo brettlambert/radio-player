@@ -1,0 +1,49 @@
+<div>
+    <header class="main-header">
+        <div class="inner">
+            <div class="logo">
+                <a [routerLink]="['/player']">
+                    <img src="./assets/img/main-logo.png" alt="Logo">
+                </a>
+            </div>
+            <div class="advertisement-320x100">
+                <img src="./assets/img/320x100-placeholder.jpg">
+            </div>
+        </div>
+    </header>
+
+    <div class="notifications" *ngIf="notifications.stack">
+        <div *ngFor="let notification of notifications.stack" class="msg {{ notification.type }}">
+            {{ notification.message }}
+        </div>
+    </div>
+
+
+    <main [@routerTransition]="getState(o)">
+        <router-outlet #o="outlet"></router-outlet>
+    </main>
+
+    <footer class="main-footer">
+        <div class="inner">
+            <ul class="footer-nav">
+                <li>
+                    <a [routerLink]="['/player']">
+                        <i class="fas fa-volume-up"></i> Player
+                    </a>
+                </li>
+                <li class="play-btn" (click)="toggleStreamingPlayer($event)">
+                    <a [routerLink]="['/player']">
+                        <i class="fas fa-play" *ngIf="!streaming.isPlaying() && !streaming.isLoading()"></i>
+                        <i class="fas fa-pause" *ngIf="streaming.isPlaying() && !streaming.isLoading()"></i>
+                        <i class="fas fa-spinner fa-pulse" *ngIf="streaming.isLoading()"></i>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/playlist']">
+                        <i class="fas fa-clock"></i> Playlist
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
