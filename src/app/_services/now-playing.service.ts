@@ -157,6 +157,11 @@ export class NowPlayingService {
 			        				}
 			        			});
 
+			        			// If track doesn't have played_at grab it from timestamp attribute
+			        			if(trackData['played_at'] == undefined){
+			        				trackData['played_at'] = track['$']['timestamp'] * 1000;
+			        			}
+
 			        			// Push new Track to tracksList
 			        			tracksList.push(new Track(trackData));
 			        		}
