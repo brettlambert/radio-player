@@ -5,15 +5,15 @@
 export const environment = {
 	production: false,
 	now_playing: {
-		provider: 2,
-		data_url: 'http://localhost/radio-player/player/now-playing.json',
+		provider: 1,
+		data_url: 'http://np.tritondigital.com/public/nowplaying?mountName=WSPKFMAAC&numberToFetch=1&eventType=track',
 		generic_cover: './assets/img/generic-cover-art.jpg',
 		format_tracks: true,
 		default_title: 'Unknown Title',
 		default_artist: 'Unknown Artist'
 	},
 	streaming: {
-		url: 'http://localhost/',
+		url: 'http://provisioning.streamtheworld.com/m3u/WSPKFMAAC.m3u',
 		format: ['aac', 'mp3'],
 		html5: true,
 		autoplay: true
