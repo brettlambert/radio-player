@@ -25,6 +25,8 @@ export class Track {
 
 		if(this.played_at && this.duration){
 			this.ends_at = ((this.played_at / 1000) + (this.duration / 1000)) * 1000; 
+		}else{
+			this.ends_at = (new Date).getTime() + 30000;
 		}
 	}
 
