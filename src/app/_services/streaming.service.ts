@@ -46,6 +46,8 @@ export class StreamingService {
     			}
 
     			resolve(sources);
+    		}, (err) => {
+    			this.notifications.create('error', 'Error loading PLS file: ' + err.statusText);
     		});
 
 		});
@@ -77,6 +79,8 @@ export class StreamingService {
     			}
 
     			resolve(sources);
+    		}, (err) => {
+    			this.notifications.create('error', 'Error loading M3U file: ' + err.statusText);
     		});
 
 		});
@@ -125,7 +129,6 @@ export class StreamingService {
 			src: sources,
 			format: environment.streaming.format,
 			html5: environment.streaming.html5,
-			autoplay: environment.streaming.autoplay,
 			onload: () => {
 				this.status = 'loaded';
 			},
@@ -134,12 +137,20 @@ export class StreamingService {
 
 				this.notifications.create('error', 'Unable to load media at given url.');
 
+				this.pause();
+
 				this.error.next();
 			},
-			onplayerror: () => {
+			onplayerror: (err) => {
 				this.status = 'playerror';
 
-				this.notifications.create('error', 'Unable to stream media at given url.');
+				if(err == 1002){
+					this.notifications.create('warning', 'Your browser\'s autoplay policy prevents streaming from autoplaying. Please click play to listen.');
+				}else{
+					this.notifications.create('error', 'Unable to stream media at given url.');
+				}
+
+				this.pause();
 
 				this.error.next();
 			},

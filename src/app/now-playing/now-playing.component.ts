@@ -89,7 +89,7 @@ export class NowPlayingComponent implements OnInit {
 				//Set 10 second timeout and check for track again
 				setTimeout(() => {
 					this.getCurrentTrack();
-				}, 10000);
+				}, 30000);
 			}, 500);
 		});
 	}

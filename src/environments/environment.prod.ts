@@ -2,7 +2,7 @@ export const environment = {
 	production: true,
 	now_playing: {
 		provider: 1,
-		data_url: 'http://np.tritondigital.com/public/nowplaying?mountName=WSPKFMAAC&eventType=track&limit={{limit}}',
+		data_url: 'http://np.tritondigital.com/public/nowplaying?mountName=WSPKFMAAC&numberToFetch={{limit}}&eventType=track',
 		generic_cover: './assets/img/generic-cover-art.jpg',
 		format_tracks: true,
 		default_title: 'Unknown Title',
@@ -11,6 +11,7 @@ export const environment = {
 	streaming: {
 		url: 'http://provisioning.streamtheworld.com/m3u/WSPKFMAAC.m3u',
 		format: ['aac', 'mp3'],
-		html5: true
+		html5: true,
+		autoplay: true
 	}
 };
