@@ -24,10 +24,20 @@ export class Track {
 		}
 
 		if(this.played_at && this.duration){
-			this.ends_at = ((this.played_at / 1000) + (this.duration / 1000)) * 1000; 
+			this.duration = this.timeStrToMilliseconds( this.duration );
+			this.ends_at = ((this.played_at / 1000) + (this.duration / 1000)) * 1000;
 		}else{
 			this.ends_at = (new Date).getTime() + 30000;
 		}
+	}
+
+	/**
+	 * Turns 00:03:12
+	 * Into 192000
+	 * @param time string
+	 */
+	timeStrToMilliseconds( time ) {
+		return (Number(time.split(':')[0])*3600+Number(time.split(':')[1])*60+Number(time.split(':')[2]))*1000;	
 	}
 
 	/**
